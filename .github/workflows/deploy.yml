@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-workflow_dispatch:
+  workflow_dispatch:
     inputs:
       action:
         description: 'Action to perform (apply or destroy)'
@@ -50,4 +50,4 @@ jobs:
     # Terraform Destroy (only if 'destroy' is selected)
     - name: Terraform Destroy
       if: ${{ github.event.inputs.action == 'destroy' }}
-      run: terraform destroy -auto-approve -lock=false
+      run: terraform destroy -auto-approve -lock=false 
