@@ -39,4 +39,5 @@ jobs:
     # Terraform Apply
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' # Only apply for main branch
-      run: terraform apply -auto-approve
+      # run: terraform apply -auto-approve
+      run: terraform destroy -auto-approve
