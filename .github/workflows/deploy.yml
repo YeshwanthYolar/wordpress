@@ -5,6 +5,16 @@ on:
     branches:
       - main
 
+workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (apply or destroy)'
+        required: true
+        default: 'apply'
+        options:
+          - 'apply'
+          - 'destroy'
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -32,20 +42,12 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # Terraform Plan
-    # - name: Terraform Plan
-    #   run: terraform plan
+     # Terraform Apply (only if 'apply' is selected)
+    - name: Terraform Apply
+      if: ${{ github.event.inputs.action == 'apply' }}
+      run: terraform apply -auto-approve
 
-    # Terraform Apply
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/main' # Only apply for main branch
-    #   run: terraform apply -auto-approve
-     
-# Terraform Plan
-    - name: Terraform Plan
-      run: terraform plan -destroy
-
-      # Terraform destroy
+    # Terraform Destroy (only if 'destroy' is selected)
     - name: Terraform Destroy
-      if: github.ref == 'refs/heads/main' # Only apply for main branch
+      if: ${{ github.event.inputs.action == 'destroy' }}
       run: terraform destroy -auto-approve -lock=false
