@@ -1,5 +1,5 @@
 aws_region = "us-east-1"
-aws_profile = "yesh" 
+# aws_profile = "yesh" 
 availability_zone = "us-east-1a"
 
 instance_ami = "ami-005fc0f236362e99f"
