@@ -41,28 +41,28 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # # Terraform Plan
-    # - name: Terraform Plan
-    #   run: terraform plan
+    # Terraform Plan
+    - name: Terraform Plan
+      run: terraform plan
 
     # Choose between Apply or Destroy
-      - name: "Run Terraform Action"
-        run: |
-          # Capture the input action and ensure a default value
-          ACTION="${{ github.event.inputs.action || 'apply' }}"
+    - name: Run Terraform Action
+      run: |
+        # Capture the input action and ensure a default value
+        ACTION="${{ github.event.inputs.action }}"
 
-          # Debugging: Show the action being run
-          echo "Action selected: $ACTION"
+        # Debugging: Show the action being run
+        echo "Action selected: $ACTION"
 
-          # Check the action and execute accordingly
-          if [[ "$ACTION" == "apply" ]]; then
-            echo "Running Terraform Apply..."
-            terraform plan -out=tfplan
-            terraform apply -auto-approve tfplan
-          elif [[ "$ACTION" == "destroy" ]]; then
-            echo "Running Terraform Destroy..."
-            terraform destroy -auto-approve
-          else
-            echo "Invalid action specified: $ACTION"
-            exit 1
-          fi
+        # Check the action and execute accordingly
+        if [[ "$ACTION" == "apply" ]]; then
+          echo "Running Terraform Apply..."
+          terraform plan -out=tfplan
+          terraform apply -auto-approve tfplan
+        elif [[ "$ACTION" == "destroy" ]]; then
+          echo "Running Terraform Destroy..."
+          terraform destroy -auto-approve
+        else
+          echo "Invalid action specified: $ACTION"
+          exit 1
+        fi
