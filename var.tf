@@ -39,9 +39,9 @@ variable "availability_zone" {
   type = string
 }
 
-variable "aws_profile" {
-    description = "profile for aws"
-    type = string
-}
+# variable "aws_profile" {
+#     description = "profile for aws"
+#     type = string
+# }
 
 
