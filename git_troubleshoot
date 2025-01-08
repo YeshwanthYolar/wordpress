@@ -1,0 +1,18 @@
+
+error: failed to push some refs to 'https://github.com/YeshwanthYolar/wordpress.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+for the following error try using below trouble shooting step
+
+Allow merging unrelated histories
+You can use the --allow-unrelated-histories flag to pull the remote changes and merge the histories:
+
+
+git pull origin main --allow-unrelated-histories
+
+Push your changes
+git push --set-upstream origin main
+
