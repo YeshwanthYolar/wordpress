@@ -18,7 +18,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.5.7  # Specify the required Terraform version
+        terraform_version: 1.9.8  # Specify the required Terraform version
 
     # Configure AWS credentials
     - name: Configure AWS credentials
