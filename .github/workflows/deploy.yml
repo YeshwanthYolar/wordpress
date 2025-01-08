@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   workflow_dispatch:
     inputs:
       action:
@@ -42,7 +41,11 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-     # Terraform Apply (only if 'apply' is selected)
+    # Terraform Plan
+    - name: Terraform Plan
+      run: terraform plan
+
+    # Terraform Apply (only if 'apply' is selected)
     - name: Terraform Apply
       if: ${{ github.event.inputs.action == 'apply' }}
       run: terraform apply -auto-approve
@@ -50,4 +53,4 @@ jobs:
     # Terraform Destroy (only if 'destroy' is selected)
     - name: Terraform Destroy
       if: ${{ github.event.inputs.action == 'destroy' }}
-      run: terraform destroy -auto-approve -lock=false 
+      run: terraform destroy -auto-approve -lock=false
