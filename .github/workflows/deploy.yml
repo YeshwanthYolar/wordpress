@@ -41,12 +41,18 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
+    # Terraform Plan
+    - name: Terraform Plan
+      run: terraform plan
 
     # Choose between Apply or Destroy
     - name: Run Terraform Action
       run: |
-        # Capture the input action and ensure a default value
-        ACTION="${{ github.event.inputs.action || "apply" }}"
+        # Check if the action input is provided, else use 'apply' as default
+        ACTION="${{ github.event.inputs.action }}"
+        if [ -z "$ACTION" ]; then
+          ACTION="apply"
+        fi
 
         # Debugging: Show the action being run
         echo "Action selected: $ACTION"
