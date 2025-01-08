@@ -46,7 +46,7 @@ jobs:
     - name: Run Terraform Action
       run: |
         # Capture the input action and ensure a default value
-        ACTION="${{ github.event.inputs.action }}"
+        ACTION="${{ github.event.inputs.action || "apply" }}"
 
         # Debugging: Show the action being run
         echo "Action selected: $ACTION"
